@@ -1,17 +1,23 @@
-import { Link, Route } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import { Header } from './components';
-import { Home, Cart } from './pages'
+import { Cart, Home } from './pages';
 
 
 function App() {
+  const [pizzas, setPizzas] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://localhost:3000/db.json').then(resp => resp.json()).then(json => {
+      setPizzas(json.pizzas)
+    })
+  }, [])
 
   return (
     <div className="wrapper">
-      <Link to="/">
-        <Header />
-      </Link>
+      <Header />
       <div className="content">
-        <Route path='/' component={Home} exact />
+        <Route path='/' render={() => <Home items={pizzas}/>} exact />
         <Route path='/cart' component={Cart} exact />
       </div>
     </div>
