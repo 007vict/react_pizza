@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
+
 
 function PizzaBlock({ name, price,imageUrl, types, sizes }) {
   const availableTypes = ['тонкое', 'традиционное']
@@ -68,6 +70,14 @@ function PizzaBlock({ name, price,imageUrl, types, sizes }) {
       </div>
     </div>
   );
+}
+
+PizzaBlock.propTypes = {
+  name: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  types: PropTypes.arrayOf(PropTypes.number).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default PizzaBlock;
