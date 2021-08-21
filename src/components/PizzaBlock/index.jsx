@@ -1,6 +1,7 @@
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+
 
 
 function PizzaBlock({ name, price,imageUrl, types, sizes }) {
@@ -79,5 +80,12 @@ PizzaBlock.propTypes = {
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
+
+PizzaBlock.defaultProps = {
+  name: '---',
+  price: 0,
+  types: [],
+  sizes: [],
+};
 
 export default PizzaBlock;
