@@ -1,21 +1,17 @@
-import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Header } from './components';
 import { Cart, Home } from './pages';
-import { setPizzas } from './redux/actions/pizzas';
+import { fetchPizzas } from './redux/actions/pizzas';
 
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/pizzas').then(({ data }) => {
-      console.log(data);
-      dispatch(setPizzas(data));
-    })
-  }, [])
+    dispatch(fetchPizzas())
+}, [])
 
   return (
     <div className="wrapper">
@@ -25,7 +21,7 @@ function App() {
         <Route path="/cart" component={Cart} exact />
       </div>
     </div>
-  );
+  )
 }
 
 export default App
