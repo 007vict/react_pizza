@@ -2,6 +2,7 @@
   "name": "react-pizza",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -90,7 +91,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://pizzareactt.herokuapp.com/",
+  "proxy": "http://localhost:3001/",
   "browserslist": {
     "production": [
       ">0.2%",
