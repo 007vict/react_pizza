@@ -91,7 +91,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://pizzareactt.herokuapp.com:3001/",
+  "proxy": "https://pizzareactt.herokuapp.com/",
   "browserslist": {
     "production": [
       ">0.2%",
