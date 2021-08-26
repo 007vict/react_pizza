@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CartItem } from '../components';
-import { clearCart } from '../redux/actions/cart';
+import { Button, CartItem } from '../components';
+import { clearCart, removeCartItem, plusCartItem, minusCartItem } from '../redux/actions/cart';
 import cartEmptyImage from '../assets/img/empty-cart.png'
 import { Link } from 'react-router-dom';
 
@@ -19,6 +19,24 @@ function Cart() {
       dispatch(clearCart());
     }
   };
+
+  const onRemoveItem = (id) => {
+    if(window.confirm('Are you realy цфте to delete item?')) {
+      dispatch(removeCartItem(id));
+    }
+  }
+
+  const onPlusItem = (id) => {
+    dispatch(plusCartItem(id))
+  }
+
+  const onMinusItem = (id) => {
+    dispatch(minusCartItem(id));
+  };
+
+  const onClickOrder = () => {
+    console.log('Your order!', items);
+  }
 
   return (
     <div className="content">
@@ -100,11 +118,16 @@ function Cart() {
             <div className="content__items">
               {adeddPizzas.map((obj) => (
                 <CartItem
+                  key={obj.id}
+                  id={obj.id}
                   name={obj.name}
                   type={obj.type}
                   size={obj.size}
                   totalPrice={items[obj.id].totalPrice}
                   totalCount={items[obj.id].items.length}
+                  onRemove={onRemoveItem}
+                  onPlus={onPlusItem}
+                  onMinus={onMinusItem}
                 />
               ))}
             </div>
@@ -133,12 +156,13 @@ function Cart() {
                       strokeLinejoin="round"
                     />
                   </svg>
-
-                  <span>Вернуться назад</span>
+                  <Link to="/">
+                    <span>Вернуться назад</span>
+                  </Link>
                 </a>
-                <div className="button pay-btn">
+                <Button onClick={onClickOrder} className="pay-btn">
                   <span>Оплатить сейчас</span>
-                </div>
+                </Button>
               </div>
             </div>
           </div>
@@ -146,7 +170,7 @@ function Cart() {
           <div className="container container--cart">
             <div className="cart cart--empty">
               <h2>
-                Корзина пустая <icon>😕</icon>
+                Корзина пустая <i>😕</i>
               </h2>
               <p>
                 Вероятней всего, вы не заказывали ещё пиццу.
